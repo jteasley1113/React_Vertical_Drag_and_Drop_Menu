@@ -1,2 +1,4 @@
 # React_Vertical_Drag_and_Drop_Menu
 Created with CodeSandbox
+
+This is a realtively simple drag and drop menu made within the React framework. The Beautiful DnD npm package did not have the feature to restrict the axis on which you can move the draggable items. And while some paid for packages offer this feature such as MDBootstrap, I opted for the completely custom lightweight code to fit my exact specifications. It's not perfect (I'm implementing this in another application so CSS is not my top priority) and I'm sure you may find ways to make the code more efficient, but hopefully it can serve as a good starting point if you want to have complete customization of your drag and drop menu and/or would like to restrict the x or y axis within React. It is currently set to restrict the x axis and only allow movement on the y axis, but I left the x axis movements in the comments. Simply uncomment those lines and go from there.  
