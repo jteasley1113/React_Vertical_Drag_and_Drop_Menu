@@ -1,0 +1,29 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+h2 {
+  margin-bottom: 50px;
+}
+
+ul {
+  list-style-type: none;
+  background-color: gray;
+  border: solid black 2px;
+  border-radius: 5px;
+  padding: 20px;
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+li {
+  padding: 15px;
+  border-bottom: solid #f0f0f0 2px;
+  border-left: solid #f0f0f0 2px;
+  border-right: solid #f0f0f0 2px;
+}
+
+li:nth-child(1) {
+  border-top: solid #f0f0f0 2px;
+}
