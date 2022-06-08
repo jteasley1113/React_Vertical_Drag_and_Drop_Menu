@@ -9,13 +9,13 @@ export default function App() {
     y: null,
     bottom: null,
     top: null,
-    height: null
+    height: null,
   });
 
   const [dragStyle, setDragStyle] = useState(
     Array(5).fill({
       transform: "translate(0px, 0px)",
-      transitionDuration: "1s"
+      transitionDuration: "1s",
     })
   );
 
@@ -32,47 +32,51 @@ export default function App() {
       var newDragStyle = [...dragStyle];
 
       newDragStyle[dragging.index] = {
-        transform: `translate(0px, ${y}px)`
+        transform: `translate(0px, ${y}px)`,
       };
 
       var i;
       var count = -1;
-      for (i = dragging.index; i < 5; i++) {
+      for (i = dragging.index; i < 4; i++) {
         count += 1;
         if (y >= dragging.height * 0.5 + count * dragging.height) {
           newDragStyle[i + 1] = {
             transform: "translate(0px, -51px)",
-            transitionDuration: "0.3s"
+            transitionDuration: "0.3s",
           };
         } else {
           newDragStyle[i + 1] = {
             transform: "translate(0px, 0px)",
-            transitionDuration: "0.3s"
+            transitionDuration: "0.3s",
           };
         }
       }
       count = -1;
-      for (i = 0; i <= dragging.index; i++) {
-        count += 1;
-        if (y < -(dragging.height * 0.5 + count * dragging.height)) {
-          newDragStyle[dragging.index - i - 1] = {
-            transform: "translate(0px, 51px)",
-            transitionDuration: "0.3s"
-          };
-        } else {
-          newDragStyle[dragging.index - i - 1] = {
-            transform: "translate(0px, 0px)",
-            transitionDuration: "0.3s"
-          };
+
+      if (dragging.index > 0) {
+        for (i = 0; i <= dragging.index; i++) {
+          console.log(dragging.index);
+          count += 1;
+          if (y < -(dragging.height * 0.5 + count * dragging.height)) {
+            newDragStyle[dragging.index - i - 1] = {
+              transform: "translate(0px, 51px)",
+              transitionDuration: "0.3s",
+            };
+          } else {
+            newDragStyle[dragging.index - i - 1] = {
+              transform: "translate(0px, 0px)",
+              transitionDuration: "0.3s",
+            };
+          }
         }
       }
       setDragStyle(newDragStyle);
+      console.log(dragStyle);
     }
   };
 
   const handleMouseDown = (e) => {
     e.preventDefault();
-    console.log(ref.current.getBoundingClientRect());
     var top = ref.current.getBoundingClientRect().top;
     // var left = ref.current.getBoundingClientRect().left;
     // var x = window.event.clientX;
@@ -95,7 +99,7 @@ export default function App() {
       bottom: ref.current.getBoundingClientRect().bottom,
       top: top,
       height: height,
-      remaining: remaining
+      remaining: remaining,
     });
   };
 
@@ -107,11 +111,10 @@ export default function App() {
       y: null,
       bottom: null,
       top: null,
-      height: null
+      height: null,
     });
     var newDragStyle = [...dragStyle];
 
-    console.log(newDragStyle);
     let number = 0;
     newDragStyle.forEach((item, index) => {
       if (item.transform !== "translate(0px, 0px)") {
@@ -121,7 +124,7 @@ export default function App() {
           number -= 1;
         }
         newDragStyle[index] = {
-          transform: "translate(0px, 0px)"
+          transform: "translate(0px, 0px)",
         };
       }
     });
@@ -129,8 +132,11 @@ export default function App() {
     const newListItems = [...listItems];
     const currentIndex = newListItems[dragging.index];
 
-    newListItems.splice(dragging.index, 1);
-    newListItems.splice(dragging.index + number, 0, currentIndex);
+    if (currentIndex) {
+      newListItems.splice(dragging.index, 1);
+      newListItems.splice(dragging.index + number, 0, currentIndex);
+    }
+
     setListItems(newListItems);
     setDragStyle(newDragStyle);
   };
@@ -147,7 +153,7 @@ export default function App() {
                 index={index}
                 style={{
                   transform: dragStyle[index].transform,
-                  transitionDuration: dragStyle[index].transitionDuration
+                  transitionDuration: dragStyle[index].transitionDuration,
                 }}
                 onMouseDown={handleMouseDown}
               >
